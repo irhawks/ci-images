@@ -1,7 +1,7 @@
-image: $CI_REGISTRY_REPONAME/irhawks/docker:stable
+image: $CI_DOCKER_REGISTRY_REPO_NAME/irhawks/docker:stable
 
 services:
-  - $CI_REGISTRY_REPONAME/irhawks/docker:dind
+  - $CI_DOCKER_REGISTRY_REPO_NAME/irhawks/docker:dind
 
 variables:
   DOCKER_HOST: tcp://localhost:2375/
@@ -9,10 +9,10 @@ variables:
 
 before_script:
   - docker info
-  - docker login --username $CI_REGISTRY_USERNAME --password $CI_REGISTRY_PASSWORD $CI_REGISTRY_REPONAME
+  - docker login --username $CI_REGISTRY_USER --password $CI_REGISTRY_PASS $CI_DOCKER_REGISTRY_REPO_NAME
 
 build-maven:
   stage: build
   script:
-  - cd maven && docker build -t $CI_REGISTRY_REPONAME/irhawks/maven:default
-  - docker push $CI_REGISTRY_REPONAME/irhawks/maven:default
+  - cd maven && docker build -t $CI_DOCKER_REGISTRY_REPO_NAME/irhawks/maven:default
+  - docker push $CI_DOCKER_REGISTRY_REPO_NAME/irhawks/maven:default
