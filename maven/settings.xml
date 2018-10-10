@@ -18,7 +18,7 @@
 
   <servers>
     <server>
-      <id>nexus</id>
+      <id>nexus-upload</id>
       <username>${env.CI_MAVEN_UPLOAD_USER}</username>
       <password>${env.CI_MAVEN_UPLOAD_PASS}</password>
     </server>
