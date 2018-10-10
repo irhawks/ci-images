@@ -14,5 +14,6 @@ before_script:
 build-maven:
   stage: build
   script:
-  - cd maven && docker build -t $CI_DOCKER_REGISTRY_REPO_NAME/irhawks/maven:default
+  - cd maven
+  - docker build -t $CI_DOCKER_REGISTRY_REPO_NAME/irhawks/maven:default .
   - docker push $CI_DOCKER_REGISTRY_REPO_NAME/irhawks/maven:default
