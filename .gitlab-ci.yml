@@ -9,7 +9,7 @@ variables:
 
 before_script:
   - docker info
-  - docker login --username $CI_REGISTRY_USER --password $CI_REGISTRY_PASS $CI_DOCKER_REGISTRY_REPO_NAME
+  - docker login --username $CI_DOCKER_REGISTRY_USER --password $CI_DOCKER_REGISTRY_PASS $CI_DOCKER_REGISTRY_REPO_NAME
 
 build-maven:
   stage: build
