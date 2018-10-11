@@ -9,11 +9,6 @@
       <url>${env.CI_MAVEN_REPO_URL}</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
-    <mirror>
-      <id>nexus-upload</id>
-      <name>For uploading artifacts</name>
-      <url>${env.CI_MAVEN_UPLOAD_URL}</url>
-    </mirror>
   </mirrors>
 
   <servers>
