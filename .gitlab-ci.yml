@@ -17,8 +17,9 @@ maven:
     - master
   script:
   - cd maven
-  - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:default .
-  - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:default
+  - export TAG=v`date +%Y%m%d`
+  - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:$TAG .
+  - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:$TAG
 
 r-testthat:
   stage: build
@@ -26,5 +27,6 @@ r-testthat:
     - master
   script:
   - cd r/testthat
-  - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1 .
-  - docker push -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1
+  - export TAG=v`date +%Y%m%d`
+  - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1$TAG .
+  - docker push -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1$TAG
