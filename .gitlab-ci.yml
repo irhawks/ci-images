@@ -14,8 +14,7 @@ before_script:
 maven:
   stage: build
   only:
-    changes:
-      - maven/*
+    - master
   script:
   - cd maven
   - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:default .
@@ -24,8 +23,7 @@ maven:
 r-testthat:
   stage: build
   only:
-    changes:
-      - r/*
+    - master
   script:
   - cd r/testthat
   - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1 .
