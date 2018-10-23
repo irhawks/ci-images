@@ -17,12 +17,18 @@ stages:
 
 build-maven:
   stage: build
+  only:
+    changes:
+      - maven/*
   script:
   - cd maven
   - docker build -t $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default .
 
 deploy-maven:
   stage: deploy
+  only:
+    changes:
+      - maven/*
   dependencies:
   - build-maven
   script:
@@ -32,12 +38,18 @@ deploy-maven:
 
 build-r-testthat:
   stage: build
+  only:
+    changes:
+      - r/*
   script:
   - cd r/testthat
   - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1 .
   
 deploy-r-testthat:
   stage: deploy
+  only:
+    changes:
+      - r/*
   dependencies:
   - build-r-testthat
   script:
