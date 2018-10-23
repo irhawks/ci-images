@@ -21,3 +21,15 @@ deploy-maven:
   script:
   - cd maven
   - docker push $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default
+
+build-r-testthat:
+  stage: build
+  script:
+  - cd r/testthat
+  - docker bulid -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1 .
+  
+deploy-r-testthat:
+  stage: build
+  script:
+  - cd r/testthat
+  - docker push -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1
