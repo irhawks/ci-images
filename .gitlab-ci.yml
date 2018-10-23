@@ -16,12 +16,14 @@ stages:
   - deploy
 
 build-maven:
+  allow_failure: true
   stage: build
   script:
   - cd maven
   - docker build -t $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default .
 
 deploy-maven:
+  allow_failure: true
   stage: deploy
   dependencies:
   - build-maven
@@ -30,12 +32,14 @@ deploy-maven:
   - docker push $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default
 
 build-r-testthat:
+  allow_failure: true
   stage: build
   script:
   - cd r/testthat
   - docker bulid -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1 .
   
 deploy-r-testthat:
+  allow_failure: true
   stage: deploy
   dependencies:
   - build-r-testthat
