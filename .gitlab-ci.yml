@@ -11,32 +11,17 @@ before_script:
   - docker info
   - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
 
-stages:
-  - build
-  - deploy
-
-build-maven:
+maven:
   stage: build
   only:
     changes:
       - maven/*
   script:
   - cd maven
-  - docker build -t $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default .
+  - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:default .
+  - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:default
 
-deploy-maven:
-  stage: deploy
-  only:
-    changes:
-      - maven/*
-  dependencies:
-  - build-maven
-  script:
-  - cd maven
-  - docker push $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default
-  when: always
-
-build-r-testthat:
+r-testthat:
   stage: build
   only:
     changes:
@@ -44,15 +29,4 @@ build-r-testthat:
   script:
   - cd r/testthat
   - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1 .
-  
-deploy-r-testthat:
-  stage: deploy
-  only:
-    changes:
-      - r/*
-  dependencies:
-  - build-r-testthat
-  script:
-  - cd r/testthat
   - docker push -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1
-  when: always
