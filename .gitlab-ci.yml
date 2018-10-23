@@ -1,7 +1,7 @@
-image: $CI_DOCKER_UPLOAD_NAME/irhawks/docker:stable
+image: $CI_DOCKER_REMOTE_NAME/irhawks/docker:stable
 
 services:
-  - $CI_DOCKER_UPLOAD_NAME/irhawks/docker:dind
+  - $CI_DOCKER_REMOTE_NAME/irhawks/docker:dind
 
 variables:
   DOCKER_HOST: tcp://localhost:2375/
