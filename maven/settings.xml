@@ -6,16 +6,21 @@
     <mirror>
       <id>maven-nexus</id>
       <name>Default Local Mirror proxy</name>
-      <url>${env.CI_MAVEN_REPO_URL}</url>
+      <url>${env.CI_MAVEN_REMOTE_NAME}</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
 
   <servers>
     <server>
-      <id>nexus-upload</id>
-      <username>${env.CI_MAVEN_UPLOAD_USER}</username>
-      <password>${env.CI_MAVEN_UPLOAD_PASS}</password>
+      <id>nexus-releases</id>
+      <username>${env.CI_MAVEN_RELEASES_USER}</username>
+      <password>${env.CI_MAVEN_RELEASES_PASS}</password>
+    </server>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>${env.CI_MAVEN_SNAPSHOTS_USER}</username>
+      <password>${env.CI_MAVEN_SNAPSHOTS_PASS}</password>
     </server>
   </servers>
 </settings>
