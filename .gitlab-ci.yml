@@ -1,7 +1,7 @@
-image: $CI_DOCKER_REMOTE_NAME/irhawks/docker:stable
+image: $CI_DOCKER_UPLOAD_NAME/irhawks/docker:stable
 
 services:
-  - $CI_DOCKER_REMOTE_NAME/irhawks/docker:dind
+  - $CI_DOCKER_UPLOAD_NAME/irhawks/docker:dind
 
 variables:
   DOCKER_HOST: tcp://localhost:2375/
@@ -9,15 +9,15 @@ variables:
 
 before_script:
   - docker info
-  - docker login --username $CI_DOCKER_REMOTE_USER --password $CI_DOCKER_REMOTE_PASS $CI_DOCKER_REMOTE_NAME
+  - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
 
 build-maven:
   stage: build
   script:
   - cd maven
-  - docker build -t $CI_DOCKER_REMOTE_NAME/irhawks/maven:default .
+  - docker build -t $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default .
 deploy-maven:
   stage: deploy
   script:
   - cd maven
-  - docker push $CI_DOCKER_REMOTE_NAME/irhawks/maven:default
+  - docker push $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default
