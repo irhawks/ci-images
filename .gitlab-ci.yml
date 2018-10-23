@@ -12,13 +12,11 @@ before_script:
   - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
 
 build-maven:
-  stage: build
   script:
   - cd maven
   - docker build -t $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default .
 
 deploy-maven:
-  stage: deploy
   dependencies:
     - build-maven
   script:
@@ -26,13 +24,13 @@ deploy-maven:
   - docker push $CI_DOCKER_UPLOAD_NAME/irhawks/maven:default
 
 build-r-testthat:
-  stage: build
   script:
   - cd r/testthat
   - docker bulid -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1 .
   
 deploy-r-testthat:
-  stage: build
+  dependencies:
+  - build-r-testthat
   script:
   - cd r/testthat
   - docker push -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1
