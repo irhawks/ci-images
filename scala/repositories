@@ -1,0 +1,4 @@
+[repositories]
+local
+repox-maven: SBT_MIRROR_URL
+repox-ivy: SBT_MIRROR_URL, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
