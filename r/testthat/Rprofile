@@ -1,3 +1,4 @@
+## R repository configurations
 local({r <- getOption("repos")
        r["Nexus"] <- Sys.getenv("CI_CRAN_REMOTE_NAME")
        options(repos=r)
