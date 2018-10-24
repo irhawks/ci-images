@@ -35,6 +35,9 @@ maven:
 
 
 ubuntu:
+  only:
+    changes:
+      - ubuntu/*
   variables:
     UBUNTU_BASE_IMAGE_VERSION: "18.04"
     #UBUNTU_APT_REMOTE_NAME: "http://mirrors4.tuna.tsinghua.edu.cn/ubuntu"
