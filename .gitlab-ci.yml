@@ -24,7 +24,8 @@ maven:
 r-testthat:
   stage: build
   only:
-    - master
+    changes:
+    - r/*
   script:
   - cd r/testthat
   - export TAG=v`date +%Y%m%d`
