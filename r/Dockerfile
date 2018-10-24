@@ -8,3 +8,4 @@ ENV CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}
 ADD scripts ./scripts
 RUN scripts/ubuntu_add_cran.sh
 RUN scripts/install_r_dev.sh
+RUN scripts/install_geo_packages.sh
