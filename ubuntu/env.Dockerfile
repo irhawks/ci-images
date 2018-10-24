@@ -15,3 +15,5 @@ RUN bash scripts/install_locales.sh
 RUN bash scripts/install_cmdline_tools.sh
 #RUN bash scripts/install_daemons.sh
 
+RUN bash scripts/install_toolchains.sh
+
