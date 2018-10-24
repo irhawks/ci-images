@@ -32,7 +32,7 @@ r-testthat:
   - docker push -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1$TAG
 
 
-ubuntu:
+.ubuntu:
   variables:
     UBUNTU_BASE_IMAGE_VERSION: 18.04
     UBUNTU_APT_REMOTE_NAME: http://mirrors4.tuna.tsinghua.edu.cn/ubuntu
@@ -42,8 +42,8 @@ ubuntu:
     REMOTE_FULLLOAD_URL: http://repo:9992
     REMOTE_APTCACHE_URL: http://repo:9993
     ## backup vars
-    UBUNTU_APT_REMOTE_NAME: ${APTCACHE_URL}/ubuntu
-    CRAN_REMOTE_NAME: ${APTCACHE_URL}/CRAN
+    UBUNTU_APT_REMOTE_NAME: APTCACHE_URL/ubuntu
+    CRAN_REMOTE_NAME: APTCACHE_URL/CRAN
   before_script:
     - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg UBUNTU_APT_REMOTE_NAME=${UBUNTU_APT_REMOTE_NAME}"
     - export DOCKER_INTERNAL_BUILD_ARGS="--build-arg UBUNTU_APT_REMOTE_NAME=${UBUNTU_APT_REMOTE_NAME} --build-arg REMOTE_RESOURCE_URL=${REMOTE_RESOURCE_URL} --build-arg REMOTE_BULKLOAD_URL=${REMOTE_BULKLOAD_URL}"
