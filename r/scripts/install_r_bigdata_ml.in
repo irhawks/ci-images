@@ -1,0 +1,35 @@
+## ---------------------------------------------------------------------
+
+## Sparkling water的安装见<https://github.com/h2oai/rsparkling>。
+## 里面主要依赖于Spark来做机器学习。
+## 现在我们都部署在一台机器上。或者可以单独配置一台Spark机器，
+## 在每台Spark机器上都安装有H2O等组件。这样可能有利于微服务与短小的应用。
+
+#RUN Rscript -e 'install.packages("sparklyr")'
+#Sys.setenv(SPARK_HOME="/path/to/spark")
+
+RUN Rscript -e 'install.packages("sparklyr")'
+
+ARG sparkling_version=2.2.2
+ARG sparkling_filename=sparkling-water-${sparkling_version}.zip
+ARG sparkling_url=${bulkload_url}/h2o/$sparkling_filename
+RUN \
+  cd /opt && wget -c $sparkling_url &&\
+  unzip $sparkling_filename &&\
+  rm $sparkling_filename
+
+## install rsparkling (local or from CRAN)
+# install.packages("rsparkling")
+
+ARG rsparkling_version=0.2.2
+ARG rsparkling_filename=rsparkling_${rsparkling_version}.tar.gz
+ARG rsparkling_url=${bulkload_url}/h2o/$rsparkling_filename
+
+RUN \
+  wget -c $rsparkling_url &&\
+  R CMD INSTALL $rsparkling_filename &&\
+  rm $rsparkling_filename
+
+RUN echo "options(rsparkling.sparklingwater.version = '2.2.2')" >> /root/.Rprofile # Using Sparkling Water 2.0.1
+RUN echo "options(rsparkling.sparklingwater.location ='/opt/${sparkling_filename%.zip}/assembly/build/libs/sparkling-water-assembly_2.11-2.2.2-all.jar')" >> /root/.Rprofile
+

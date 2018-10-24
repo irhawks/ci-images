@@ -1,7 +1,7 @@
 #!/bin/bash
 ## ---------------------------------------------------------------------
 
-echo "deb ${CRAN_REMOTE_NAME}/ubuntu xenial/" > /etc/apt/sources.list.d/cran.list
+echo "deb ${CRAN_REMOTE_NAME}/ubuntu bionic/" > /etc/apt/sources.list.d/cran.list
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | apt-key add -
 apt update

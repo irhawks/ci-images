@@ -1,0 +1,48 @@
+## ---------------------------------------------------------------------
+
+## install and configure shiny server
+
+ARG shiny_version=1.5.6.875
+ARG shiny_filename=shiny-server-${shiny_version}-amd64.deb
+ARG shiny_url=${bulkload_url}/rstudio/$shiny_filename
+
+
+## Shiny Server的依赖
+RUN apt update &&\
+  apt install -y gdebi-core pandoc pandoc-citeproc libcurl4-gnutls-dev libcairo2-dev libxt-dev &&\
+  apt clean
+
+RUN \
+  apt install -y gdebi-core libapparmor1 sudo psmisc lsb-release &&\
+  wget $shiny_url &&\
+  dpkg -i $shiny_filename &&\
+  rm $shiny_filename
+
+RUN Rscript -e "install.packages(c('shiny', 'rmarkdown', 'formatR', 'bookdown'), Ncpus=10)"
+
+#    cp -R /usr/local/lib/R/site-library/shiny/examples/* /srv/shiny-server/ && \
+#    rm -rf /var/lib/apt/lists/*
+#
+#EXPOSE 3838
+#
+
+##!/bin/sh
+#
+## Make sure the directory for individual app logs exists
+#mkdir -p /var/log/shiny-server
+#chown shiny.shiny /var/log/shiny-server
+#
+#exec shiny-server 2>&1
+#
+#COPY shiny-server.sh /usr/bin/shiny-server.sh
+#
+#CMD ["/usr/bin/shiny-server.sh"]
+
+
+#docker run --rm -p 3838:3838 \
+#    -v /srv/shinyapps/:/srv/shiny-server/ \
+#    -v /srv/shinylog/:/var/log/shiny-server/ \
+#    rocker/shiny
+
+
+## bookdown rticles rmdshower

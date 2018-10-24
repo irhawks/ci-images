@@ -1,0 +1,23 @@
+## ---------------------------------------------------------------------
+
+## 使用R增强之后的安装软件包
+
+## 参考自己在其它机器上面找到的各种各样的包（明天将它们整理一下）
+## 达到的效果就是各种各样的代码都在里面完成
+
+## Code and Tools execution environment
+RUN apt install -y r-base r-base-dev r-cran-igraph r-cran-tensor
+
+RUN apt install -y r-cran-shiny r-cran-htmlwidgets r-cran-dplyr r-cran-tidyr
+
+## ---------------------------------------------------------------------
+
+## R language packages for publications
+
+## R default options
+## see <https://stat.ethz.ch/R-manual/R-devel/library/base/html/options.html>
+## 
+# options(max.print=10, useFancyQuotes="TeX")
+## 见自己所准备的软件版本库
+RUN Rscript -e "install.packages(c('rmarkdown', 'shiny', 'flexdashboard', 'shinydashboard'))"
+RUN Rscript -e "install.packages(c('formatR', 'bookdown'))"

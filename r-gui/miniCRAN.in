@@ -1,0 +1,8 @@
+## ---------------------------------------------------------------------
+
+## install igraph and miniCRAN
+RUN apt update &&\
+  apt install -y --no-install-recommends r-cran-igraph &&\
+  apt clean
+RUN Rscript -e 'install.packages("miniCRAN")'
+

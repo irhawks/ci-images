@@ -1,0 +1,28 @@
+## ---------------------------------------------------------------------
+
+## install and configure rstudio-server
+# if you have apparmor, add this line:
+# mv /etc/apparmor.d/rstudio-server /etc/apparmor.d/rstudio-server.bak &&\
+
+ARG rserver_version=1.1.383
+ARG rserver_filename=rstudio-server-${rserver_version}-amd64.deb
+ARG rserver_url=${bulkload_url}/rstudio/$rserver_filename
+RUN \
+  apt install -y gdebi-core libapparmor1 sudo psmisc &&\
+  wget $rserver_url &&\
+  dpkg -i $rserver_filename &&\
+  rm $rserver_filename
+
+RUN \
+  echo "auth-required-user-group=rstudio" >> /etc/rstudio/rserver.conf &&\
+  echo "auth-minimum-user-id=0" >> /etc/rstudio/rserver.conf &&\
+  cp /usr/lib/rstudio-server/extras/init.d/debian/rstudio-server /etc/init.d/rstudio-server &&\
+  cp /usr/lib/rstudio-server/extras/pam/rstudio /etc/pam.d/rstudio &&\
+  sed -i 's/^\([^#].*pam_succeed_if.so.*\)/#\1/' /etc/pam.d/rstudio &&\
+  groupadd rstudio && usermod root -G rstudio 
+
+# RUN cp /etc/environment /root/.Renviron
+
+## if install cuda
+RUN echo "rsession-ld-library-path=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64" >> /etc/rstudio/rserver.conf
+

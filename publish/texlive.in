@@ -1,0 +1,16 @@
+## 安装texlive并且，以官网上的install-tl的方式
+
+RUN apt-get install -y curl perl wget
+
+# TeX Live
+CD /root
+RUN curl -OL http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
+    mkdir install-tl && \
+    tar -xvf install-tl-unx.tar.gz -C install-tl --strip-components=1
+
+CD /root/install-tl
+COPY texlive.profile ./
+RUN echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/texlive/2016/bin/x86_64-linux"' > /etc/environment
+RUN ./install-tl --profile=texlive.profile
+CD /root
+RUN rm -rf install-tl install-tl-unx.tar.gz

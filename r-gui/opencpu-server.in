@@ -1,0 +1,54 @@
+## <https://github.com/onetapbeyond/opencpu-spark-executor/blob/master/examples/scala/hello-world/src/main/scala/io/onetapbeyond/opencpu/spark/executor/examples/HelloWorld.scala>介绍了通过使用OCPU计算框架将Scala封装R的代码，并将R直接执行于大数据当中。
+## OpenCPU可以看成是一个执行R等语言的分布式引擎，负责将R语言的计算能力进行封装
+
+## opencpu dependencies
+
+RUN apt install -y wget make devscripts apache2-dev apache2 libapreq2-dev r-base r-base-dev libapparmor-dev libcurl4-openssl-dev libprotobuf-dev protobuf-compiler xvfb xauth xfonts-base curl libssl-dev libxml2-dev libicu-dev pkg-config libssh2-1-dev
+
+## opencpu (Local Single-User Server)
+
+RUN Rscript -e 'install.packages("opencpu")'
+
+# Run Apps directly from Github
+#library(opencpu)
+#ocpu_start_app("rwebapps/nabel")
+#ocpu_start_app("rwebapps/markdownapp")
+#ocpu_start_app("rwebapps/stockapp")
+
+### build rapache, <libapache2-mod-r-base>
+#cd ~
+#wget https://github.com/jeffreyhorner/rapache/archive/v1.2.9.tar.gz
+#tar xzf v1.2.9.tar.gz
+#cd rapache-1.2.9
+#dpkg-buildpackage -us -uc
+#
+### build opencpu
+#cd ~
+#wget https://github.com/opencpu/opencpu-server/archive/v2.0.tar.gz
+#tar xzf v2.0.tar.gz
+#cd opencpu-server-2.0
+#dpkg-buildpackage -us -uc
+#
+### install
+#cd ~
+#
+## Only if needed, see above
+#sudo dpkg -i libapache2-mod-r-base_*.deb
+#
+## Always needed
+#sudo dpkg -i opencpu-lib_*.deb
+#sudo dpkg -i opencpu-server_*.deb
+#
+#
+### test
+#
+#curl http://localhost/ocpu/info
+
+RUN \
+  apt install -y libapache2-mod-r-base &&\
+  wget -c ${bulkload_url}/opencpu/opencpu-lib_2.0.6-xenial0_amd64.deb  &&\
+  wget -c ${bulkload_url}/opencpu/opencpu-server_2.0.6-xenial0_all.deb &&\
+  dpkg -i opencpu-lib_2.0.6-xenial0_amd64.deb  &&\
+  dpkg -i opencpu-server_2.0.6-xenial0_all.deb
+
+CMD ["opencpu-server"]

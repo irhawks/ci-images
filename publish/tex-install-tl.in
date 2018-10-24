@@ -1,0 +1,46 @@
+## ---------------------------------------------------------------------
+
+## install texlive
+
+ARG INSTALL_SCRIPT=install-tl-ubuntu
+ARG SCRIPT_PATH=https://github.com/scottkosty/install-tl-ubuntu/raw/master/$INSTALL_SCRIPT
+
+RUN \
+  wget $SCRIPT_PATH&&\
+  chmod +x ./$INSTALL_SCRIPT &&\
+  ./$INSTALL_SCRIPT --repository ${fulllload_url}/CTAN/systems/texlive/tlnet
+
+## if you'd like to install offical texlive packagese in apm:
+#RUN apt install -y texlive-full
+
+
+## ---------------------------------------------------------------------
+
+## 还要包括latexmk, noweb，还有git latexdiff等插件
+
+## texlive environments
+ENV TEXMFHOME /root/.texmf
+RUN wget -qO- $resource_url/hardwire/ETC+profile.d+tex.sh > /etc/profile.d/tex.sh
+
+
+## ---------------------------------------------------------------------
+
+## install pandoc and filters
+RUN \
+  apt install -y pandoc pandoc-citeproc pandoc-citeproc-preamble &&\
+  apt install -y python-pip python-pandocfilters python-pygments &&\
+  apt install -y plantuml graphviz abcm2ps abcmidi wkhtmltopdf &&\
+  apt clean
+
+## pandocer filters
+## ensure git 
+  # mkdir -p /etc/profile.d &&\
+RUN \
+  cd /opt && git clone https://github.com/jgm/pandocfilters.git &&\ 
+  cd /opt/pandocfilters/examples && chmod +x *.py &&\ 
+  echo 'export PATH=/opt/pandocfilters/examples:$PATH' >> /etc/profile.d/tex.sh
+
+## install npm filters if you would like it
+#RUN \
+#  npm install -g pandoc-plantuml-filter pandoc-mermaid-filter
+
