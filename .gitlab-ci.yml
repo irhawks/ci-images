@@ -41,7 +41,7 @@ ubuntu:
     REMOTE_BULKLOAD_URL: http://repo:9991
     REMOTE_FULLLOAD_URL: http://repo:9992
     REMOTE_APTCACHE_URL: http://repo:9993
-  vars_backup:
+    ## backup vars
     UBUNTU_APT_REMOTE_NAME: ${APTCACHE_URL}/ubuntu
     CRAN_REMOTE_NAME: ${APTCACHE_URL}/CRAN
   before_script:
