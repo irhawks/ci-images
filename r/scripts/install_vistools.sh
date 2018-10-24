@@ -1,3 +1,4 @@
 #!/bin/bash
 
-Rscript -e 'install.packages(c("geosphere", "dplyr", "mapview", "ggplot2", "plotly", "leaflet"))'
+Rscript -e 'install.packages(c("ggplot2", "plotly"))'
+Rscript -e 'install.packages(c("mapview", "leaflet", "leaflet.extras"))'
