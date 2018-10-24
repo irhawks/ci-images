@@ -79,3 +79,5 @@ Rscript -e 'install.packages(c("devtools", "covr"))'
 Rscript -e "install.packages('tidyverse')"
 
 Rscript -e 'install.packages(c("tidyr", "purrr", "dplyr"))'
+
+Rscript -e 'install.packages("roxygen2")'
