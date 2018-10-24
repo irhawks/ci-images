@@ -68,4 +68,14 @@ Rscript -e "install.packages(c('Rcpp', 'devtools'))"
 
 ## 测试以及源代码下载
 
+
+apt install -yq libcurl4-openssl-dev  ## required by package curl
+apt install -yq libmariadbclient-dev  ## RMySQL
+apt-get install -y libpq-dev libiodbc2-dev
+
+apt install -yq libxml2-dev
+
 Rscript -e 'install.packages(c("devtools", "covr"))'
+Rscript -e "install.packages('tidyverse')"
+
+Rscript -e 'install.packages(c("tidyr", "purrr", "dplyr"))'

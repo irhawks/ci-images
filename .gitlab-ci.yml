@@ -67,7 +67,7 @@ rlang-ci:
     - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}"
     - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
     - export
-    - export TAG=irhawks/rlang/ci-base:v`date +%Y%m%d`
+    - export TAG=irhawks/rlang/ci-default:v`date +%Y%m%d`
   script:
     - cd r
     - docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/$TAG -f Dockerfile .
