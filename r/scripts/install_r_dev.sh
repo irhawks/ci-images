@@ -65,3 +65,7 @@ Rscript -e "install.packages(c('Rcpp', 'devtools'))"
 #zlib1g-dev
 
 ## 上面是编译R的时候所考虑到的各个软件包（我们不妨参照R编译时的需求，构建R开发的环境
+
+## 测试以及源代码下载
+
+Rscript -e 'install.packages(c("devtools", "covr"))'
