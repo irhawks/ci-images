@@ -1,12 +1,12 @@
+#!/bin/bash
 ## ---------------------------------------------------------------------
 
-RUN \
-  echo "deb ${mirror_proxy_cran}/ubuntu xenial/" > /etc/apt/sources.list.d/cran.list &&\ 
-  gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 &&\ 
-  gpg -a --export E084DAB9 | apt-key add - &&\ 
-  apt update && apt clean
+echo "deb ${CI_CRAN_REMOTE_NAME}/ubuntu xenial/" > /etc/apt/sources.list.d/cran.list
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+gpg -a --export E084DAB9 | apt-key add -
+apt update
 
-RUN echo "r <- getOption('repos'); r['CRAN'] <- '${mirror_proxy_cran_packages}'; options(repos=r)" >> /root/.Rprofile
+echo "r <- getOption('repos'); r['CRAN'] <- '${CI_CRAN_REMOTE_NAME}'; options(repos=r)" >> /root/.Rprofile
 
 
 ## ---------------------------------------------------------------------
