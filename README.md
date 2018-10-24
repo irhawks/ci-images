@@ -15,3 +15,7 @@ CI related building environments for private use of gitlab
 - CI_MAVEN_RELEASES_NAME: http://nexus.irhawks.com/repository/maven-releases/
 - CI_MAVEN_RELEASES_USER: maven
 - CI_MAVEN_RELEASES_PASS: maven
+
+## 设计思想
+
+在命名上面尽量简单。比如说，在ubuntu上面的肯定是安装ubuntu的组件。所以直接用install_ssh_daemon.sh作为名子就可以了，不用添加ubuntu_install_ssh_daemon.sh这样的命子。如果添加这些名子，又显得太冗余了。
