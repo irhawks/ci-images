@@ -6,3 +6,4 @@ ENV CI_CRAN_REMOTE_NAME=${CI_CRAN_REMOTE_NAME}
 
 ADD scripts /root/scripts
 RUN scripts/ubuntu_add_cran.sh
+RUN scripts/install_r_dev.sh
