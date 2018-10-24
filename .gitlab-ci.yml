@@ -61,7 +61,8 @@ ubuntu:
 ## 基于构建出来的ubuntu来构建R镜像 
 rlang-ci:
   variables:
-    CRAN_REMOTE_NAME: "http://mirrors4.tuna.tsinghua.edu.cn/CRAN"
+    #CRAN_REMOTE_NAME: "http://mirrors4.tuna.tsinghua.edu.cn/CRAN"
+    CRAN_REMOTE_NAME: "http://int.nexus.irhawks.com/repository/cran"
   before_script:
     - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}"
     - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME

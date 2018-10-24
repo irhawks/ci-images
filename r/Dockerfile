@@ -2,8 +2,8 @@
 FROM upload.docker.nexus.irhawks.com/irhawks/ubuntu:18.04-base
 LABEL maintainer "irhawks <irhawks@163.com>"
 
-ARG CI_CRAN_REMOTE_NAME=${CI_CRAN_REMOTE_NAME}
-ENV CI_CRAN_REMOTE_NAME=${CI_CRAN_REMOTE_NAME}
+ARG CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}
+ENV CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}
 
 ADD scripts ./scripts
 RUN scripts/ubuntu_add_cran.sh
