@@ -63,6 +63,9 @@ rlang-ci:
   variables:
     #CRAN_REMOTE_NAME: "http://mirrors4.tuna.tsinghua.edu.cn/CRAN"
     CRAN_REMOTE_NAME: "http://int.nexus.irhawks.com/repository/cran"
+  only:
+    changes:
+      - r/*
   before_script:
     - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}"
     - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
@@ -71,13 +74,28 @@ rlang-ci:
     - cd r
     - export TAG=irhawks/rlang/ci-default:v`date +%Y%m%d`
     - |
-      echo "Building full images"
+      echo "Building default images"
       docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/$TAG -f ci-full .
       docker push ${CI_DOCKER_UPLOAD_NAME}/$TAG
 
     - export TAG=irhawks/rlang/ci-full:v`date +%Y%m%d`
     - |
-      echo "Building full images"
+      echo "Upload full images"
       docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/$TAG -f ci-full .
+      docker push ${CI_DOCKER_UPLOAD_NAME}/$TAG
+
+sbt-default:
+  variables:
+  only:
+    changes:
+      - scala/*
+  before_script:
+    - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}"
+    - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
+  script:
+    - |
+      cd scala
+      export TAG=irhawks/scala/ci-default:v`date +%Y%m%d`
+      docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/$TAG -f Dockerfile .
       docker push ${CI_DOCKER_UPLOAD_NAME}/$TAG
 
