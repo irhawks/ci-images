@@ -1,0 +1,45 @@
+## ---------------------------------------------------------------------
+
+## 需要首先安装spark以及hadoop组件。在此基础上进行叠加
+
+
+## 使用Spark发行版自己的Python，注意pyspark还需安装py4j
+RUN pip install py4j
+# RUN pip install pyspark
+
+
+## ---------------------------------------------------------------------
+
+## big data
+## python下面的spark是一个小型web框架
+RUN pip install sparkly pyhive spark-sklearn spark-yarn-submit
+RUN pip install sparkts sparkit-learn jupyter-spark dask-spark pyspark-pandas
+
+## Python和SPark上面的生态系统，完成诸如数据清理在内的各项工作。
+## Optimus is the missing framework for cleaning and preprocessing data in a distributed fashion with pyspark
+RUN pip install pypandoc
+RUN pip install optimuspyspark
+
+## http://spark.apache.org/docs/latest/api/python/pyspark.ml.html, pyspark添加的ML包。
+## <https://github.com/lensacom/sparkit-learn>
+## <https://spark-packages.org/package/saurfang/sbt-spark-submit>
+
+
+## ---------------------------------------------------------------------
+
+## 其实也可以直接使用Spark自带的PySpark。使用过程是这样的：
+## 与R软件非常类似
+#import os
+#import sys
+#
+## Configure the environment
+#if 'SPARK_HOME' not in os.environ:
+#    os.environ['SPARK_HOME'] = '/srv/spark'
+#
+## Create a variable for our root path
+#SPARK_HOME = os.environ['SPARK_HOME']
+#
+## Add the PySpark/py4j to the Python Path
+#sys.path.insert(0, os.path.join(SPARK_HOME, "python", "build"))
+#sys.path.insert(0, os.path.join(SPARK_HOME, "python"))
+

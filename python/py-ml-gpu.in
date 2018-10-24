@@ -1,0 +1,23 @@
+## ---------------------------------------------------------------------
+
+## Python机器学习基本库，特别是深度学习
+## 注意是pip3
+RUN pip install tensorflow-gpu keras
+
+## ---------------------------------------------------------------------
+
+## deep learning and machine learning
+## install mxnet-mkl instead of mxnet
+RUN pip install h2o
+
+#RUN pip install mxnet-kml
+#error: mxnet-kml
+
+## ---------------------------------------------------------------------
+
+#RUN pip install keras-mxnet
+## export machine learning models to PMML
+#RUN pip install keras2pmml
+RUN pip install sklearn-pmml
+##error: mxnet-to-coreml failed
+

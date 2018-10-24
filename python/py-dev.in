@@ -1,0 +1,8 @@
+## ---------------------------------------------------------------------
+
+## 软件项目管理，通用数据读取
+
+RUN pip install tox pylint flake8 tox-travis
+RUN pip install pytest pytest-cov testtools mock fixtures coverage
+# RUN pip install tox-docker
+

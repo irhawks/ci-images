@@ -1,0 +1,24 @@
+## ---------------------------------------------------------------------
+
+# GUI interface need to load various font files
+RUN apt install -y fonts-wqy-microhei ttf-wqy-zenhei
+
+#RUN apt install -y gnome-control-center
+
+RUN apt install -y ibus-table ibus-pinyin dbus-x11 ibus-gtk ibus-gtk3 ibus-qt4
+
+RUN \
+  wget -c ${bulkload_url}/ibus-table-wubi-wmwb06nc-v1.0.0.deb &&\
+  dpkg -i ibus-table-wubi-wmwb06nc-v1.0.0.deb &&\
+  rm ibus-table-wubi-wmwb06nc-v1.0.0.deb
+
+## ---------------------------------------------------------------------
+
+## enhanced gui features
+
+## Your have installed firefox and other gui applications, ssh is enabled
+## 确保X11 forwarding状态为Yes
+
+RUN apt install -y gconf2 gconf-service
+RUN apt install -y libnotify4 libnss3 python gvfs-bin xdg-utils libxss1
+

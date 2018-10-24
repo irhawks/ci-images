@@ -1,0 +1,28 @@
+## ---------------------------------------------------------------------
+
+## python big data and deep learning fusion
+
+## install elephas, Keras + Spark + Python
+## <https://github.com/maxpumperla/elephas>
+
+## install dependency packages
+RUN apt install -y liblapack-dev libblas-dev gfortran
+## install elephas
+RUN pip install elephas
+
+## 配置完成之后安装elephas
+
+## 可以添加如下的SPARK_OPTS, 
+## ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info
+## 教程见<https://github.com/maxpumperla/elephas>
+
+## 注意版本号的问题
+
+## ---------------------------------------------------------------------
+
+## H2O Based Fusion
+
+## install the following packages for h2o_pysparkling
+RUN pip install requests tabulate six future
+
+RUN pip install h2o_pysparkling_2.2 tfspark

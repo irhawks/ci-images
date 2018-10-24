@@ -1,0 +1,15 @@
+## ---------------------------------------------------------------------
+
+## install conda3
+
+ARG conda_filename="Anaconda3-5.0.1-Linux-x86_64.sh"
+ARG conda_url=${bulkload_url}/conda/$conda_filename
+
+RUN \
+  wget -c $conda_url &&\
+  bash $conda_filename -b -p /opt/conda &&\
+  rm $conda_filename &&\
+  echo "PATH=$PATH:/opt/conda/bin" >> /root/.bashrc
+
+ENV PATH=/opt/conda/bin:$PATH
+
