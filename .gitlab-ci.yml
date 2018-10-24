@@ -69,6 +69,6 @@ rlang-ci:
     - export TAG=irhawks/rlang/ci-base:v`date +%Y%m%d`
   script:
     - cd r
-    - docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/$TAG -f env.Dockerfile .
+    - docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/$TAG -f Dockerfile .
     - docker push ${CI_DOCKER_UPLOAD_NAME}/$TAG
 
