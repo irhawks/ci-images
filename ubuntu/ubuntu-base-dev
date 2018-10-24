@@ -8,9 +8,7 @@ ARG REMOTE_BULKLOAD_URL
 ARG REMOTE_FULLLOAD_URL
 ARG REMOTE_APTCACHE_URL
 
-ADD scripts ./scripts
-RUN ls ~/
-RUN pwd
+COPY scripts ./
 RUN bash scripts/change_apt_repository.sh
 RUN bash scripts/install_ssh_daemon.sh
 RUN bash scripts/install_locales.sh
