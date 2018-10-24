@@ -52,6 +52,6 @@ ubuntu:
     - export
   script:
     - cd ubuntu
-    - docker build $DOCKER_MAINLOAD_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu:18.04-base env.Dockerfile
+    - docker build $DOCKER_MAINLOAD_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu:18.04-base -f env.Dockerfile
     - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu:18.04-base
 
