@@ -1,4 +1,5 @@
-FROM docker.nexus.irhawks.com/irhawks/ubuntu/base:18.04v20181024
+#FROM docker.nexus.irhawks.com/irhawks/ubuntu/base:18.04v20181024
+FROM upload.docker.nexus.irhawks.com/irhawks/ubuntu:18.04-base
 LABEL maintainer "irhawks <irhawks@163.com>"
 
 ARG CI_CRAN_REMOTE_NAME=${CI_CRAN_REMOTE_NAME}
