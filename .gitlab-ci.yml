@@ -30,7 +30,7 @@ r-testthat:
   - cd r/testthat
   - export TAG=v`date +%Y%m%d`
   - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1$TAG .
-  - docker push -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1$TAG
+  - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1$TAG
 
 
 .ubuntu:
