@@ -52,8 +52,23 @@ ubuntu:
     - export DOCKER_INTERNAL_BUILD_ARGS="--build-arg UBUNTU_APT_REMOTE_NAME=${UBUNTU_APT_REMOTE_NAME} --build-arg REMOTE_RESOURCE_URL=${REMOTE_RESOURCE_URL} --build-arg REMOTE_BULKLOAD_URL=${REMOTE_BULKLOAD_URL}"
     - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
     - export
+    - export TAG=v`date +%Y%m%d`
   script:
     - cd ubuntu
-    - docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu:18.04-base -f env.Dockerfile .
-    - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu:18.04-base
+    - docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu/base:18.04$TAG -f env.Dockerfile .
+    - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu/base:18.04$TAG
+
+## 基于构建出来的ubuntu来构建R镜像 
+rlang-ci:
+  variables:
+    CRAN_REMOTE_NAME: "http://mirrors4.tuna.tsinghua.edu.cn/CRAN"
+  before_script:
+    - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}"
+    - docker login --username $CI_DOCKER_UPLOAD_USER --password $CI_DOCKER_UPLOAD_PASS $CI_DOCKER_UPLOAD_NAME
+    - export
+    - export TAG=irhawks/rlang/ci-base:v`date +%Y%m%d`
+  script:
+    - cd r
+    - docker build $DOCKER_MAINLAND_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/$TAG -f env.Dockerfile .
+    - docker push ${CI_DOCKER_UPLOAD_NAME}/$TAG
 
