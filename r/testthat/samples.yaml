@@ -1,4 +1,5 @@
-image: rocker/rstudio  
+image: ${CI_DOCKER_REMOTE_NAME}/irhawks/rlang-ci:3.4.1v20181024
+
 test:  
    script:
     - R -e 'install.packages(c("needed here"))'

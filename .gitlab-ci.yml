@@ -22,7 +22,8 @@ maven:
   - docker build -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:$TAG .
   - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/maven:$TAG
 
-r-testthat:
+## 基于rstudio所构建的镜像不太可行，还是需要自己用ubuntu
+.r-testthat:
   stage: build
   only:
     - master
@@ -33,20 +34,24 @@ r-testthat:
   - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/rlang-ci:3.4.1$TAG
 
 
-.ubuntu:
+ubuntu:
   variables:
     UBUNTU_BASE_IMAGE_VERSION: 18.04
     UBUNTU_APT_REMOTE_NAME: http://mirrors4.tuna.tsinghua.edu.cn/ubuntu
     CRAN_REMOTE_NAME: http://mirrors4.tuna.tsinghua.edu.cn/CRAN
-    REMOTE_RESOURCE_URL: http://repo:9990
-    REMOTE_BULKLOAD_URL: http://repo:9991
-    REMOTE_FULLLOAD_URL: http://repo:9992
-    REMOTE_APTCACHE_URL: http://repo:9993
-    ## backup vars
-    UBUNTU_APT_REMOTE_NAME: APTCACHE_URL/ubuntu
-    CRAN_REMOTE_NAME: APTCACHE_URL/CRAN
+    #REMOTE_RESOURCE_URL: http://repo:9990
+    #REMOTE_BULKLOAD_URL: http://repo:9991
+    #REMOTE_FULLLOAD_URL: http://repo:9992
+    #REMOTE_APTCACHE_URL: http://repo:9993
+    ### backup vars
+    #UBUNTU_APT_REMOTE_NAME: APTCACHE_URL/ubuntu
+    #CRAN_REMOTE_NAME: APTCACHE_URL/CRAN
   before_script:
-    - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg UBUNTU_APT_REMOTE_NAME=${UBUNTU_APT_REMOTE_NAME}"
+    - export DOCKER_MAINLAND_BUILD_ARGS="--build-arg UBUNTU_APT_REMOTE_NAME=${UBUNTU_APT_REMOTE_NAME} --build-arg CRAN_REMOTE_NAME=${CRAN_REMOTE_NAME}"
     - export DOCKER_INTERNAL_BUILD_ARGS="--build-arg UBUNTU_APT_REMOTE_NAME=${UBUNTU_APT_REMOTE_NAME} --build-arg REMOTE_RESOURCE_URL=${REMOTE_RESOURCE_URL} --build-arg REMOTE_BULKLOAD_URL=${REMOTE_BULKLOAD_URL}"
+    - export
   script:
-    - echo "hello"
+    - cd ubuntu
+    - docker build $DOCKER_MAINLOAD_BUILD_ARGS -t ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu:18.04-base env.Dockerfile
+    - docker push ${CI_DOCKER_UPLOAD_NAME}/irhawks/ubuntu:18.04-base
+
