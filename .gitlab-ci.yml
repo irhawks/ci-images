@@ -36,9 +36,9 @@ maven:
 
 ubuntu:
   variables:
-    UBUNTU_BASE_IMAGE_VERSION: 18.04
-    UBUNTU_APT_REMOTE_NAME: http://mirrors4.tuna.tsinghua.edu.cn/ubuntu
-    CRAN_REMOTE_NAME: http://mirrors4.tuna.tsinghua.edu.cn/CRAN
+    UBUNTU_BASE_IMAGE_VERSION: "18.04"
+    UBUNTU_APT_REMOTE_NAME: "http://mirrors4.tuna.tsinghua.edu.cn/ubuntu"
+    CRAN_REMOTE_NAME: "http://mirrors4.tuna.tsinghua.edu.cn/CRAN"
     #REMOTE_RESOURCE_URL: http://repo:9990
     #REMOTE_BULKLOAD_URL: http://repo:9991
     #REMOTE_FULLLOAD_URL: http://repo:9992
