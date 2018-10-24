@@ -7,7 +7,7 @@
 ## require dirmngr &&\
 
 DEBIAN_FRONTEND=noninteractive apt update
-apt install -y -q --no-install-recommends r-base r-base-dev
+DEBIAN_FRONTEND=noninteractive apt install -y -q --no-install-recommends r-base r-base-dev
 
 ## ---------------------------------------------------------------------
 
